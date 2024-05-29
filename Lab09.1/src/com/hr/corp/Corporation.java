@@ -25,6 +25,12 @@ public class Corporation implements TaxPayer {
         System.out.println(getName() + " paid no taxes - we lobbied hard and it worked");
     }
 
+    // interface TaxPayer, opting for diff behavior
+    @Override
+    public void fileReturn() {
+        System.out.println(" Return not filed, corps don't need to pay");
+    }
+
     public String getName() {
         return name;
     }
