@@ -66,7 +66,11 @@ public class Department {
             // ask if salary
             // downcast employee ref to more spec type SalariedEmployee
             // then we can call salariedemployee-spec methods
+
             if (employees[i] instanceof SalariedEmployee) {
+                // downcast and method call in one shot
+                ((SalariedEmployee) employees[i]).takeVacation();
+
                 SalariedEmployee semp = (SalariedEmployee) employees[i];
                 semp.takeVacation();
             }
