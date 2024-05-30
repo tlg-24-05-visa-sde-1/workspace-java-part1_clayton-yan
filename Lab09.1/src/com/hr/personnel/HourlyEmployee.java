@@ -6,8 +6,8 @@ import java.time.LocalDate;
 
 public class HourlyEmployee extends Employee {
     // fields
-    double rate;
-    double hours;
+    private double rate;
+    private double hours;
 
     // constructors
     public HourlyEmployee() {
@@ -58,7 +58,7 @@ public class HourlyEmployee extends Employee {
     }
 
     @Override
-    public void payTaxes() {
+    public void payTaxes() { // interface TaxPayer
         System.out.println(getName() + " paid taxes of " + (getRate() * getHours() * TaxPayer.HOURLY_TAX_RATE));
     }
 }

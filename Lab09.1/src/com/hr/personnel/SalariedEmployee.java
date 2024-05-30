@@ -7,6 +7,7 @@ import java.time.LocalDate;
 public class SalariedEmployee extends Employee {
     // fields
     double salary;
+    public static final double SALARY_STANDARD_DEDUCTION = 10_000;
 
     // constructors
     public SalariedEmployee() {
@@ -51,5 +52,10 @@ public class SalariedEmployee extends Employee {
     @Override
     public void payTaxes() {
         System.out.println(getName() + " paid taxes of " + (getSalary() * TaxPayer.SALARIED_TAX_RATE));
+    }
+
+    @Override
+    public double getStandardDeduction() {
+        return SALARY_STANDARD_DEDUCTION;
     }
 }
