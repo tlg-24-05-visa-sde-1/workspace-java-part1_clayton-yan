@@ -39,7 +39,7 @@ class HRClient {
 
         // lab begin
         dept.addEmployee(new SalariedEmployee("Clayton Future", LocalDate.of(2025,9, 23), 100_000));
-        dept.addEmployee(new HourlyEmployee("Clayton Present", LocalDate.of(2024, 5, 7), 34, 2000));
+        dept.addEmployee(new HourlyEmployee("Clayton Present", LocalDate.of(2024, 5, 7), 40, 2000));
         dept.listEmployees();
 
         // pay
