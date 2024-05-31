@@ -1,12 +1,7 @@
-/*
- * This code is sample code, provided as-is, and we make no
- * warranties as to its correctness or suitability for any purpose.
- *
- * We hope that it's useful to you.  Enjoy.
- * Copyright LearningPatterns Inc.
- */
-
 package com.hr.personnel;
+
+import gov.irs.IllegalWageException;
+import gov.irs.TaxPayer;
 
 import java.time.LocalDate;
 
@@ -14,39 +9,35 @@ public class HourlyEmployee extends Employee {
     // fields
     private double rate;
     private double hours;
+    public static final double FEDERAL_MINIMUM_WAGE = 15.0;
 
     // constructors
     public HourlyEmployee() {
+        super();
     }
 
     public HourlyEmployee(String name, LocalDate hireDate) {
-        super(name, hireDate);  // delegate to superclass ctor for name, hireDate
+        super(name, hireDate);
     }
 
-    public HourlyEmployee(String name, LocalDate hireDate, double rate, double hours) {
-        this(name, hireDate);   // delegate to neighboring ctor for name, hireDate
-        setRate(rate);          // handle rate here, by delegating to setter
-        setHours(hours);        // handle hours here, by delegating to setter
+    public HourlyEmployee (String name, LocalDate hireDate, double rate, double hours) throws IllegalWageException {
+        this(name, hireDate); // delegate to neighboring ctor
+        setRate(rate);
+        setHours(hours);
     }
 
-    // business methods
-    @Override
-    public void pay() {
-        System.out.println(getName() + " is paid hourly " + (getRate() * getHours()));
-    }
+    // getter/setter
 
-    @Override  // interface TaxPayer
-    public void payTaxes() {
-        double taxes = getRate() * getHours() * HOURLY_TAX_RATE;
-        System.out.println(getName() + " paid taxes of " + taxes);
-    }
-
-    // accessor methods
     public double getRate() {
         return rate;
     }
 
-    public void setRate(double rate) {
+    public void setRate(double rate) throws IllegalWageException {
+
+        if (rate < FEDERAL_MINIMUM_WAGE) {
+            throw new IllegalWageException(String.format("Illegal wage: %s. Fed min is %s.",
+                    rate, FEDERAL_MINIMUM_WAGE));
+        }
         this.rate = rate;
     }
 
@@ -58,8 +49,23 @@ public class HourlyEmployee extends Employee {
         this.hours = hours;
     }
 
+    // toString
+
     @Override
     public String toString() {
-        return super.toString() + ", rate=" + getRate() + ", hours=" + getHours();
+        return super.toString() +
+                ", rate= " + getRate() +
+                ", hours= " + getHours() +
+                '}';
+    }
+
+    @Override
+    public void pay() {
+        System.out.println(getName() + "is paid at " + getRate() + " * " + getHours());
+    }
+
+    @Override
+    public void payTaxes() { // interface TaxPayer
+        System.out.println(getName() + " paid taxes of " + (getRate() * getHours() * TaxPayer.HOURLY_TAX_RATE));
     }
 }
