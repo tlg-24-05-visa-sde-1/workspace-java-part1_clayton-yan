@@ -1,33 +1,33 @@
 package edu.geometry;
 
 public class Triangle implements Shape {
+    // SAS
+    private final double sideA;
+    private final double sideB;
+    private final double angle; // in degrees
 
-    private double base;
-    private double height;
-
-    public Triangle(double base, double height) {
-        setBase(base);
-        setHeight(height);
+    public Triangle(double sideA, double sideB, double angle) {
+        this.sideA = sideA;
+        this.sideB = sideB;
+        this.angle = angle;
     }
 
-    public double getBase() {
-        return base;
+    public double getSideA() {
+        return sideA;
     }
 
-    public void setBase(double base) {
-        this.base = base;
+    public double getSideB() {
+        return sideB;
     }
 
-    public double getHeight() {
-        return height;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
+    public double getAngle() {
+        return angle;
     }
 
     @Override
     public double area() {
-        return 0.5 * base * height;
+        // angle from degrees to radians
+        double angleRadians = Math.toRadians(angle);
+        return 0.5 * sideA * sideB * Math.sin(angleRadians);
     }
 }
